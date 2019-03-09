@@ -29,7 +29,7 @@ Plugin 'ambv/black'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-syntax enable			
+syntax enable
 
 set background=dark
 
@@ -44,9 +44,6 @@ set smartcase
 
 " Highlight search results
 set hlsearch
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
