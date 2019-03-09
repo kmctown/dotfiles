@@ -1,4 +1,101 @@
-syntax on
+set nocompatible		" be iMproved, required
+filetype off			" required
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+"""""""""""""""""""""""""""""
+" =>Vundle
+"""""""""""""""""""""""""""""
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Statusbar
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Git stuff
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gutter'
+
+" Python stuff
+Plugin 'ambv/black'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+filetype plugin indent on    " required
+syntax enable			
+
+set background=dark
+
+" Enable line numbers
+set number
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"""""""""""""""""""""""""""""
+" =>Leader Mgmt
+"""""""""""""""""""""""""""""
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+
+""""""""""""""""""""""""""""""
+" => Fonts
+""""""""""""""""""""""""""""""
+set guifont=OperatorMonoLig\ Nerd\ Font:h14,FuraCode\ Nerd\ Font:h14,Menlo:h14
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+
+""""""""""""""""""""""""""""""
+" => Airline (status line)
+""""""""""""""""""""""""""""""
+let g:airline_theme = 'solarized'
+let g:airline_powerline_fonts = 1
+
+
+"""""""""""""""""""""""""""""
+" => Python
+"""""""""""""""""""""""""""""
+
+" We like spaces; avoid tabs. Set colorcolumn.
+autocmd FileType python setlocal colorcolumn=88
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
