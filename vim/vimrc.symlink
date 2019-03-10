@@ -17,19 +17,24 @@ Plugin 'VundleVim/Vundle.vim'
 " Statusbar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
 
 " Git stuff
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gutter'
-
-" Python stuff
-Plugin 'ambv/black'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
-filetype plugin indent on    " required
 syntax enable
+
+" Handle tabs/spaces
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 
 set background=dark
 
