@@ -73,6 +73,15 @@ Steps to perform post installation:
 1. In iTerm2 preferences, select the `Menlo for Powerline` font, and the `Solarized Dark` theme
 1. Run `macos/set-defaults`
 1. Install `pyenv`: `brew install pyenv`
+1. Add the following to `~/.localrc`:
+
+```
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+```
 
 ## thanks
 
