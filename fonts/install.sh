@@ -3,7 +3,7 @@
 echo "Installing fonts..."
 
 # Installs fonts onto the system
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 
 fonts=(
   font-firacode-nerd-font
