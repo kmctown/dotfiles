@@ -6,8 +6,8 @@ echo "Installing fonts..."
 brew tap homebrew/cask-fonts
 
 fonts=(
-  font-firacode-nerd-font
+  font-fira-code-nerd-font
   font-menlo-for-powerline
 )
 
-brew cask install ${fonts[@]}
+brew install --cask ${fonts[@]}

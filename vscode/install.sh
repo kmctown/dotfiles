@@ -4,7 +4,7 @@ if test $(which brew)
 then	
   echo "Installing vscode..."	
 
-  brew cask install visual-studio-code	
+  brew install --cask visual-studio-code	
 
   echo "Installing vscode extensions..."	
 
