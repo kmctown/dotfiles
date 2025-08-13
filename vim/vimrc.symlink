@@ -19,6 +19,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 
+" Python
+Plugin 'davidhalter/jedi-vim'
+Plugin 'ycm-core/YouCompleteMe'
+
 " Git stuff
 Plugin 'tpope/vim-fugitive'
 
@@ -29,6 +33,8 @@ syntax enable
 
 " Handle tabs/spaces
 filetype plugin indent on
+set backspace=indent,eol,start
+
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width

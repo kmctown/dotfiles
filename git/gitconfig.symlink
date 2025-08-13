@@ -31,5 +31,20 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
+[user]
+	name = kmctown
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[merge "kintsugi"]
+	name = Kintsugi driver
+	driver = kintsugi driver %O %A %B %P
 [credential]
-	helper = osxkeychain
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[http]
+	postBuffer = 524288000
+[init]
+	defaultBranch = main
