@@ -53,5 +53,14 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 eval "$(mise activate zsh)"
 
-alias tm='task-master'
-alias taskmaster='task-master'
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/istream/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# bun completions
+[ -s "/Users/istream/.bun/_bun" ] && source "/Users/istream/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
