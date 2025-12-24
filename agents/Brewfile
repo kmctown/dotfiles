@@ -1,0 +1,18 @@
+# Brewfile for AI Agent Tooling Stack
+# Usage: brew bundle --file=~/.dotfiles/agent-tools/Brewfile
+
+# Taps
+tap "steveyegge/beads"
+
+# Language runtimes (for tools that need source install)
+brew "go"
+brew "rust"
+brew "node"
+
+# Python tooling
+brew "uv"
+
+# Core agent tools
+brew "bd"                              # beads - agent memory
+
+# Note: bv, cass, ubs, mcp-agent-mail installed separately 
