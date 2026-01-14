@@ -8,3 +8,6 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
+
+# caffeinate - prevent sleep
+alias caf="caffeinate -dimsu"
