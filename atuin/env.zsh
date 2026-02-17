@@ -1,1 +1,1 @@
-eval "$(atuin init zsh)"
+(( $+commands[atuin] )) && eval "$(atuin init zsh)"

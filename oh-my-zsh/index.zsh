@@ -5,4 +5,4 @@ DEFAULT_USER=$(whoami)
 
 plugins=(docker git yarn z)
 
-source $ZSH/oh-my-zsh.sh
+[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
