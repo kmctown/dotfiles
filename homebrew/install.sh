@@ -9,19 +9,15 @@
 if test ! $(which brew)
 then
   echo "  Installing Homebrew for you."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  # Install the correct homebrew for each OS type
-  if test "$(uname)" = "Darwin"
+  # Set up Homebrew in PATH for the rest of this script
+  if test "$(uname -m)" = "arm64"
   then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  elif test "$(expr substr $(uname -s) 1 5)" = "Linux"
-  then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else
+    eval "$(/usr/local/bin/brew shellenv)"
   fi
-
 fi
-
-# Link keg-only formulas that we want in PATH
-brew list | grep 'postgresql@' | xargs -I {} brew link {} --force 2>/dev/null
 
 exit 0

@@ -6,8 +6,11 @@ set -e
 
 cd "$(dirname $0)"/..
 
-echo "› brew bundle"
-brew bundle
+# Install from Brewfile (don't fail if a single cask is unavailable)
+if command -v brew &>/dev/null && [ -f Brewfile ]; then
+  echo "› brew bundle"
+  brew bundle || true
+fi
 
 # find the installers and run them iteratively
 find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
