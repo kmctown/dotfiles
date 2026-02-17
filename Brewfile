@@ -1,7 +1,5 @@
 cask_args appdir: '/Applications'
 
-tap 'homebrew/bundle'
-
 brew 'gh'
 brew 'imagemagick'
 brew 'wget'
