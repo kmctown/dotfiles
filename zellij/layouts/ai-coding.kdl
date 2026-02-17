@@ -11,13 +11,8 @@ layout {
 
     tab name="Coding" focus=true {
         pane split_direction="vertical" {
-            pane size="70%" split_direction="horizontal" {
-                pane size="60%" {
-                    command "claude"
-                }
-                pane size="40%" {
-                    command "codex"
-                }
+            pane size="70%" {
+                command "claude"
             }
             pane size="30%" split_direction="horizontal" {
                 pane size="60%" {
@@ -31,12 +26,7 @@ layout {
 
     tab name="Planning" {
         pane split_direction="vertical" {
-            pane size="50%" split_direction="horizontal" {
-                pane size="70%" {
-                    command "codex"
-                }
-                pane size="30%" {
-                }
+            pane size="50%" {
             }
             pane size="50%" {
                 command "bv"
