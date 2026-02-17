@@ -34,10 +34,10 @@
 [user]
 	name = kmctown
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [merge "kintsugi"]
 	name = Kintsugi driver
@@ -48,3 +48,5 @@
 	postBuffer = 524288000
 [init]
 	defaultBranch = main
+[pull]
+	rebase = true
