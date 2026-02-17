@@ -1,93 +1,124 @@
-# holman does dotfiles
+# dotfiles
 
-Your dotfiles are how you personalize your system. These are mine.
+Topic-centric dotfiles for macOS. Forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 
-I was a little tired of having long alias files and everything strewn about
-(which is extremely common on other dotfiles projects, too). That led to this
-project being much more topic-centric. I realized I could split a lot of things
-up into the main areas I used (Ruby, git, system libraries, and so on), so I
-structured the project accordingly.
-
-If you're interested in the philosophy behind why projects like these are
-awesome, you might want to [read my post on the
-subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
-
-## topical
-
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `script/bootstrap`.
-
-## what's inside
-
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser
-above and see what components may mesh up with you.
-[Fork it](https://github.com/kmctown/dotfiles/fork), remove what you don't
-use, and build on what you do use.
-
-## components
-
-There's a few special files in the hierarchy.
-
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
-  environment.
-- **topic/path.zsh**: Any file named `path.zsh` is loaded first and is
-  expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
-- **topic/install.sh**: Any file named `install.sh` is executed when you run `script/install`. To avoid being loaded automatically, its extension is `.sh`, not `.zsh`.
-- **topic/\*.symlink**: Any file ending in `*.symlink` gets symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
-
-## install
-
-Run this:
+## fresh machine setup
 
 ```sh
+# 1. install xcode command line tools
+xcode-select --install
+
+# 2. clone and bootstrap
 git clone https://github.com/kmctown/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap
 ```
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+`script/bootstrap` will:
+- prompt for git author name/email
+- symlink all `*.symlink` files to `$HOME`
+- install Homebrew (Apple Silicon compatible)
+- run `macos/set-defaults.sh` (key repeat, Finder, trackpad, etc.)
+- run all `topic/install.sh` scripts (oh-my-zsh, fonts, vim, zellij, etc.)
 
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
+## post-install
 
-`dot` is a simple script that installs some dependencies, sets sane macOS
-defaults, and so on. Tweak this script, and occasionally run `dot` from
-time to time to keep your environment fresh and up-to-date. You can find
-this script in `bin/`.
+```sh
+# set macos defaults (keyboard, Finder, trackpad, dock, etc.)
+macos/set-defaults.sh
 
-## configure
+# install mise (tool version manager) - replaces pyenv/nvm/rbenv
+curl https://mise.run | sh
 
-Steps to perform post installation:
-
-1. In iTerm2 preferences, select the `Menlo for Powerline` font, and the `Solarized Dark` theme
-1. Run `macos/set-defaults`
-1. Install `pyenv`: `brew install pyenv`
-1. Add the following to `~/.localrc`:
-
-```
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# create ~/.localrc for private env vars (API keys, tokens, etc.)
+touch ~/.localrc
 ```
 
-## thanks
+### optional: AI tooling
 
-I forked [Ryan Bates](http://github.com/ryanb)' excellent
-[dotfiles](http://github.com/ryanb/dotfiles) for a couple years before the
-weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
-dotfiles were an easy way to get into bash customization, and then to jump ship
-to zsh a bit later. A decent amount of the code in these dotfiles stem or are
-inspired from Ryan's original project.
+```sh
+# agent tools (beads, go, rust, node, uv)
+brew bundle --file=~/.dotfiles/agents/Brewfile
+
+# zellij AI coding layout (claude + lazygit + bv)
+ai-cli
+```
+
+## how it works
+
+Everything is organized by topic. Add a `java/` directory and drop files in - it just works.
+
+| Convention | Behavior |
+|---|---|
+| `topic/*.zsh` | Auto-loaded into shell |
+| `topic/path.zsh` | Loaded first (for `$PATH`) |
+| `topic/completion.zsh` | Loaded last (for autocomplete) |
+| `topic/*.symlink` | Symlinked to `$HOME` as dotfiles |
+| `topic/install.sh` | Run by `script/install` |
+| `bin/*` | Added to `$PATH` |
+
+### load order
+
+1. `~/.localrc` (private env vars)
+2. `*/path.zsh` (PATH setup)
+3. `*/*.zsh` (aliases, config, env)
+4. `*/completion.zsh` (autocomplete)
+5. mise, bun, LM Studio paths
+
+## what's inside
+
+### shell & editor
+- **zsh** - oh-my-zsh with agnoster theme, plugins: docker, git, z
+- **vim** - Vundle + airline + NERDTree + vim-go + YouCompleteMe
+- **git** - aliases (`gs`, `gl`, `gp`, `gd`, `gdm`, `gac`), gh credential helper
+
+### dev tools
+- **homebrew** - Apple Silicon path setup, auto-install
+- **go** - GOPATH config
+- **rust** - cargo bin path
+- **node** - npm setup
+- **docker** - aliases (`d`, `d-c`)
+
+### AI coding
+- **claude** - `cca` alias (agent teams mode)
+- **codex** - `codex` alias (yolo mode)
+- **zellij** - `ai-cli` layout: Claude + lazygit + bv + terminal
+- **agents** - beads (`bd`) for agent memory
+
+### macOS
+- **set-defaults.sh** - fast key repeat, Finder list view, trackpad, screenshots, etc.
+- **fix-displays.sh** - DisplayLink dock/undock fix
+- **fix-mac-network-degradation.sh** - DNS flush, TCP tuning, AWDL disable ([details](macos/README.md))
+
+### key aliases
+
+| Alias | Command |
+|---|---|
+| `gs` | `git status -sb` |
+| `gl` | `git pull --prune` |
+| `gp` | `git push origin HEAD` |
+| `gdm` | `git diff main...HEAD` |
+| `gac` | `git add -A && git commit -m` |
+| `cca` | claude agent teams (skip permissions) |
+| `ai-cli` | zellij AI coding layout |
+| `caf` | caffeinate (prevent sleep) |
+| `ng` | ngrok to k2kris.ngrok.dev |
+
+### useful bin/ scripts
+
+| Script | What it does |
+|---|---|
+| `dot` | Re-run installers, update everything |
+| `e` | Open in $EDITOR |
+| `extract` | Extract any archive format |
+| `git-nuke` | Delete branch locally + remotely |
+| `git-delete-local-merged` | Clean up merged branches |
+| `dns-flush` | Flush DNS cache |
+
+## updating
+
+Run `dot` periodically to re-run installers and keep things fresh.
+
+## credits
+
+Originally forked from [Zach Holman's dotfiles](https://github.com/holman/dotfiles), inspired by [Ryan Bates'](https://github.com/ryanb/dotfiles).
