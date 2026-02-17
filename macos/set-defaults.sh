@@ -28,20 +28,8 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
-# Hide Safari's bookmark bar.
-defaults write com.apple.Safari.plist ShowFavoritesBar -bool false
-
-# Always show Safari's "URL display" tab in the lower left on mouseover. Strangely
-# like, everyone and their LLMs on the internet thinks this is ShowStatusBar, but
-# it's not.
-defaults write com.apple.Safari ShowOverlayStatusBar -bool true
-
-# Set up Safari for development.
-defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
-defaults write com.apple.Safari.plist IncludeDevelopMenu -bool true
-defaults write com.apple.Safari.plist WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari.plist "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# Safari: these must be set manually in Safari preferences on modern macOS
+# (sandboxed container blocks defaults write)
 
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
@@ -74,13 +62,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
-
-# Never go into computer sleep mode
-sudo systemsetup -setcomputersleep Off > /dev/null
-
-# Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+# (systemsetup is deprecated on modern macOS, use System Settings instead)
 
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
