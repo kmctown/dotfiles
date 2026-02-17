@@ -152,5 +152,8 @@ then
   fi
 fi
 
+# Re-link dotfiles in case any installer overwrote our symlinks
+install_dotfiles
+
 echo ''
 echo '  All installed!'
