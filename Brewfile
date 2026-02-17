@@ -6,6 +6,7 @@ brew 'wget'
 brew 'yt-dlp'
 
 cask '1password'
+cask 'claude-code'
 cask 'codex'
 cask 'ghostty'
 cask 'visual-studio-code'
