@@ -11,17 +11,11 @@ layout {
 
     tab name="Coding" focus=true {
         pane split_direction="vertical" {
-            pane size="50%" {
+            pane size="70%" {
                 command "/bin/sh"
                 args "-c" "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions"
             }
-            pane size="50%" split_direction="horizontal" {
-                pane size="50%" {
-                    command "codex"
-                    args "--yolo" "--no-alt-screen"
-                }
-                pane size="50%" {
-                }
+            pane size="30%" {
             }
         }
     }

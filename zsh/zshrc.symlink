@@ -66,3 +66,17 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 unalias br 2>/dev/null  # br installer - remove conflicting alias
+
+# >>> MCP Agent Mail br path /Users/iceman5/.local/bin
+if [[ ":$PATH:" != *":/Users/iceman5/.local/bin:"* ]]; then
+  export PATH="/Users/iceman5/.local/bin:$PATH"
+fi
+# <<< MCP Agent Mail br path
+
+# >>> MCP Agent Mail bd alias
+alias bd='br'
+# <<< MCP Agent Mail bd alias
+
+# >>> MCP Agent Mail alias
+alias am='cd "/Users/iceman5/code/mcp_agent_mail" && scripts/run_server_with_token.sh'
+# <<< MCP Agent Mail alias
