@@ -9,4 +9,4 @@
 #
 #   $ a
 #   # => opens the AI client. yeah, easy peasy.
-CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --auto 
+CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions
