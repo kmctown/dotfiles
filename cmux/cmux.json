@@ -1,0 +1,178 @@
+[
+  {
+    "name": "AI Coding (Claude + Codex)",
+    "description": "Full agent workspace: Claude Code with agent teams + Codex + shell",
+    "keywords": ["ai", "coding", "agents", "claude", "codex"],
+    "restart": "confirm",
+    "workspace": {
+      "name": "AI Coding",
+      "color": "Purple",
+      "layout": {
+        "direction": "horizontal",
+        "split": 0.5,
+        "children": [
+          {
+            "pane": {
+              "surfaces": [
+                {
+                  "type": "terminal",
+                  "name": "Claude",
+                  "command": "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions",
+                  "focus": true
+                }
+              ]
+            }
+          },
+          {
+            "layout": {
+              "direction": "vertical",
+              "split": 0.5,
+              "children": [
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "Codex",
+                        "command": "codex --yolo"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "Shell"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "AI Coding (Claude Only)",
+    "description": "Claude Code with agent teams + shell pane",
+    "keywords": ["ai", "claude", "solo"],
+    "restart": "confirm",
+    "workspace": {
+      "name": "Claude",
+      "color": "Blue",
+      "layout": {
+        "direction": "horizontal",
+        "split": 0.7,
+        "children": [
+          {
+            "pane": {
+              "surfaces": [
+                {
+                  "type": "terminal",
+                  "name": "Claude",
+                  "command": "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions",
+                  "focus": true
+                }
+              ]
+            }
+          },
+          {
+            "pane": {
+              "surfaces": [
+                {
+                  "type": "terminal",
+                  "name": "Shell"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Claude Teams",
+    "description": "Launch Claude Code with native cmux teammate splits",
+    "keywords": ["teams", "swarm", "multi-agent"],
+    "command": "cmux claude-teams"
+  },
+  {
+    "name": "Agent Swarm",
+    "description": "Multi-agent workspace: 2x Claude + Codex + Shell for flywheel-style parallel coding",
+    "keywords": ["swarm", "flywheel", "parallel", "agents"],
+    "restart": "confirm",
+    "workspace": {
+      "name": "Swarm",
+      "color": "Magenta",
+      "layout": {
+        "direction": "horizontal",
+        "split": 0.5,
+        "children": [
+          {
+            "layout": {
+              "direction": "vertical",
+              "split": 0.5,
+              "children": [
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "Claude-1",
+                        "command": "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "Claude-2",
+                        "command": "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "layout": {
+              "direction": "vertical",
+              "split": 0.5,
+              "children": [
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "Codex",
+                        "command": "codex --yolo"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "Shell"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+]

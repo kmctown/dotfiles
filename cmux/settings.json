@@ -1,0 +1,66 @@
+{
+  // cmux settings — optimized for agentic coding workflows
+  // Docs: https://cmux.com/docs/configuration
+  // Schema: https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux-settings.schema.json
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux-settings.schema.json",
+
+  "app": {
+    "appearance": "dark",
+    "minimalMode": false,
+    "newWorkspacePlacement": "end",
+    "reorderOnNotification": true,
+    "warnBeforeQuit": true,
+    "focusPaneOnFirstClick": true,
+    "sendAnonymousTelemetry": false
+  },
+
+  "notifications": {
+    "dockBadge": true,
+    "showInMenuBar": true,
+    "unreadPaneRing": true,
+    "paneFlash": true,
+    "sound": "Pop"
+  },
+
+  "sidebar": {
+    "hideAllDetails": false,
+    "showNotificationMessage": true,
+    "showBranchDirectory": true,
+    "showPullRequests": true,
+    "showSSH": true,
+    "showPorts": true,
+    "showLog": true,
+    "showProgress": true,
+    "showCustomMetadata": true,
+    "openPullRequestLinksInCmuxBrowser": true,
+    "openPortLinksInCmuxBrowser": true
+  },
+
+  "automation": {
+    // Enable socket for CLI/agent automation
+    "socketControlMode": "automation",
+    // Native Claude Code integration — agents spawn as cmux splits
+    "claudeCodeIntegration": true
+  },
+
+  "customCommands": {
+    "trustedDirectories": [
+      "~/Code",
+      "~/.dotfiles"
+    ]
+  },
+
+  "browser": {
+    "openTerminalLinksInCmuxBrowser": true,
+    "interceptTerminalOpenCommandInCmuxBrowser": true,
+    "showSearchSuggestions": true
+  },
+
+  "workspaceColors": {
+    "indicatorStyle": "washRail"
+  },
+
+  "sidebarAppearance": {
+    "matchTerminalBackground": true
+  }
+}

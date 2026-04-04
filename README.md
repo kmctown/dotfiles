@@ -19,7 +19,7 @@ script/bootstrap
 - symlink all `*.symlink` files to `$HOME`
 - install Homebrew (Apple Silicon compatible)
 - run `macos/set-defaults.sh` (key repeat, Finder, trackpad, etc.)
-- run all `topic/install.sh` scripts (oh-my-zsh, fonts, vim, zellij, etc.)
+- run all `topic/install.sh` scripts (oh-my-zsh, fonts, vim, cmux, etc.)
 
 ## post-install
 
@@ -40,8 +40,11 @@ touch ~/.localrc
 # agent tools (beads, go, rust, node, uv)
 brew bundle --file=~/.dotfiles/agents/Brewfile
 
-# zellij AI coding layout (claude + lazygit + bv)
+# cmux AI coding workspace (claude + codex + shell)
 ai-cli
+
+# or use native Claude Code teammate splits
+claude-teams
 ```
 
 ## how it works
@@ -82,7 +85,11 @@ Everything is organized by topic. Add a `java/` directory and drop files in - it
 ### AI coding
 - **claude** - `cca` alias (agent teams mode)
 - **codex** - `codex` alias (yolo mode)
-- **zellij** - `ai-cli` layout: Claude + lazygit + bv + terminal
+- **cmux** - native macOS terminal for multi-agent coding (replaces zellij)
+  - `ai-cli` — workspace with Claude + Codex + shell
+  - `claude-teams` — Claude Code with native teammate splits
+  - `cmux-swarm` — multi-agent grid (flywheel-style)
+  - Custom commands in command palette (Cmd+Shift+P): "AI Coding", "Agent Swarm"
 - **agents** - beads (`bd`) for agent memory
 
 ### macOS
@@ -100,7 +107,9 @@ Everything is organized by topic. Add a `java/` directory and drop files in - it
 | `gdm` | `git diff main...HEAD` |
 | `gac` | `git add -A && git commit -m` |
 | `cca` | claude agent teams (skip permissions) |
-| `ai-cli` | zellij AI coding layout |
+| `ai-cli` | cmux AI coding workspace |
+| `claude-teams` | cmux native Claude teammate splits |
+| `cmux-swarm` | multi-agent grid workspace |
 | `caf` | caffeinate (prevent sleep) |
 | `ng` | ngrok to k2kris.ngrok.dev |
 
