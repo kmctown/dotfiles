@@ -1,1 +1,1 @@
-alias codex='codex --yolo'
+# codex aliases — no default flags (--yolo caused double-flag errors)

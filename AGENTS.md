@@ -1,35 +1,61 @@
-# Repository Guidelines
+# Dotfiles — Agent Guidelines
 
-## Project Structure & Module Organization
-This repository is a topic-oriented dotfiles setup. Each top-level directory represents a domain (for example `git/`, `zsh/`, `vim/`, `macos/`). Files are loaded based on naming conventions rather than a build system.
+Read this file first. Follow links for deeper context.
 
-- `bin/` holds executable utilities that are added to `$PATH`.
-- `script/` contains entry points like `script/bootstrap` and `script/install`.
-- `topic/*.zsh` files are sourced automatically; `topic/path.zsh` loads first and `topic/completion.zsh` loads last.
-- `topic/*.symlink` files are symlinked into `$HOME` (for example `zsh/zshrc.symlink` → `~/.zshrc`).
-- Platform helpers live in directories such as `macos/` and `homebrew/`.
+## What This Repo Is
 
-## Build, Test, and Development Commands
-- `script/bootstrap`: symlinks `*.symlink` files into `$HOME` and sets up git config.
-- `script/install`: runs every `install.sh` found under topics for optional setup tasks.
-- `bin/dot`: runs macOS defaults, Homebrew install/update, and then `script/install`.
-- `macos/set-defaults.sh`: applies macOS defaults (called by `bin/dot`).
+Topic-centric macOS dotfiles. Each top-level directory is a topic (git, zsh, tmux, etc.). Files are discovered by naming convention, not manifest. See [docs/INDEX.md](docs/INDEX.md) for full documentation.
 
-## Coding Style & Naming Conventions
-- Shell scripts use existing conventions in the file: 2-space indentation and POSIX `sh` or `bash` as declared by the shebang.
-- Use topical naming: new areas should be added as a new top-level directory (for example `python/`).
-- Follow loader patterns: use `path.zsh`, `completion.zsh`, `install.sh`, and `*.symlink` as appropriate.
+## Core Rules
 
-## Testing Guidelines
-There is no automated test suite. Validate changes by running the relevant scripts (for example `script/bootstrap` for symlinks or `script/install` for installers) and manually verifying the expected shell behavior.
+1. **Convention over configuration.** New topics go in a new top-level directory. Files are auto-loaded by name — don't add manual registration.
+2. **Never commit secrets.** Use `~/.localrc` for private env vars and `git/gitconfig.local.symlink` for local git identity.
+3. **Idempotent installs.** Every `install.sh` must check before acting. Guard optional tools with `command -v`.
+4. **No destructive git commands** without explicit user approval.
+5. **Keep shell startup fast.** Don't add expensive operations to `*.zsh` files.
+6. **macOS only.** This repo targets macOS (Apple Silicon and Intel).
 
-## Commit & Pull Request Guidelines
-Recent commit messages use concise, imperative summaries (for example “Update README.md”). Follow that pattern and keep the subject focused on the primary change.
+## File Conventions
 
-For pull requests, include:
-- a short description of the impact (what changed and why),
-- any manual verification you performed (commands run, platform), and
-- screenshots only when changing user-facing prompts or output.
+| Pattern | Behavior |
+|---|---|
+| `topic/*.zsh` | Auto-sourced into shell |
+| `topic/path.zsh` | Sourced first (PATH setup) |
+| `topic/completion.zsh` | Sourced last (autocomplete) |
+| `topic/*.symlink` | Symlinked to `$HOME` as dotfiles |
+| `topic/install.sh` | Run by `script/install` |
+| `bin/*` | Added to `$PATH` |
 
-## Configuration Tips
-Local machine-specific values belong in `~/.localrc` and `git/gitconfig.local.symlink`. Avoid committing secrets or machine-specific paths into shared topic files.
+## Key Commands
+
+| Command | What It Does |
+|---|---|
+| `script/bootstrap` | Fresh machine setup: symlinks, Homebrew, all installers |
+| `script/install` | Run all `topic/install.sh` scripts |
+| `bin/dot` | Pull repo, apply macOS defaults, update brew, run installers |
+| `bin/a` | Launch Claude Code with agent teams |
+| `ai-cli` | Launch tmux AI coding workspace |
+
+## Coding Style
+
+- Shell scripts: 2-space indentation, POSIX `sh` or `bash` per shebang
+- Commit messages: imperative, concise, prefixed (`feat:`, `fix:`, `chore:`)
+- No automated test suite — validate by running scripts manually
+- Follow existing patterns in the topic you're modifying
+
+## AI Coding Stack
+
+Primary multiplexer: **tmux**.
+Config: `tmux/tmux.conf`, `tmux/aliases.zsh`. Details in [docs/modules/tmux.md](docs/modules/tmux.md).
+
+## Documentation
+
+- Start here, then follow links to `docs/`
+- [docs/INDEX.md](docs/INDEX.md) — central navigation
+- [docs/reference/architecture.md](docs/reference/architecture.md) — system design
+- [docs/reference/design-patterns-and-conventions.md](docs/reference/design-patterns-and-conventions.md) — patterns
+- On significant code changes, update the relevant docs or add a dated note to [docs/updates.md](docs/updates.md)
+
+## Maintenance & Accretion
+
+Update this file when the repo's core conventions, entry points, or topic structure change. Route detail into `docs/` — keep this file under 200 lines.

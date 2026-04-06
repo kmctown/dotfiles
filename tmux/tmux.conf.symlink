@@ -15,6 +15,18 @@ setw -g pane-base-index 1
 # (default is 500 milliseconds)
 set -sg escape-time 1
 
+# Pass through extended keys (Shift+Enter, etc.) to applications
+set -s extended-keys on
+set -as terminal-features 'xterm*:extkeys'
+
+# Mouse support (selection stays within pane)
+set -g mouse on
+
+# Pane borders — heavy lines, dim inactive / bright active
+set -g pane-border-lines heavy
+set -g pane-border-style fg=colour238
+set -g pane-active-border-style fg=green
+
 
 # ----------------------------------------------------------------------
 # | Key Mappings                                                       |
@@ -40,11 +52,8 @@ if-shell \
     'test "$(uname -s)" = Darwin' \
     'set-option -g default-command "exec reattach-to-user-namespace -l $SHELL"'
 
-# Remap the copy & paste keys to work as in vim
-unbind [
-bind Escape copy-mode
-unbind p
-bind p paste-buffer
+# Vim-style copy mode
+bind [ copy-mode
 bind-key -T copy-mode-vi "v" send-keys -X begin-selection
 bind-key -T copy-mode-vi "y" send-keys -X copy-selection
 
@@ -64,13 +73,18 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# [ Alt + Arrow Keys ] Resize pane without prefix
-bind -n M-Left resize-pane -L 2
-bind -n M-Right resize-pane -R 2
-bind -n M-Up resize-pane -U 2
-bind -n M-Down resize-pane -D 2
+# [ PREFIX + H/J/K/L ] Resize panes (vim-style)
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Show PREFIX indicator in status bar
+set -g status-right '#{?client_prefix, PREFIX ,}'
 
 # [ PREFIX + r ] Reload tmux config
 bind r source-file ~/.tmux.conf \; display "tmux configs reloaded"
