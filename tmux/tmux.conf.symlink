@@ -17,6 +17,7 @@ set -sg escape-time 1
 
 # Pass through extended keys (Shift+Enter, etc.) to applications
 set -s extended-keys on
+set -s extended-keys-format csi-u
 set -as terminal-features 'xterm*:extkeys'
 
 # Mouse support (selection stays within pane)
@@ -55,7 +56,10 @@ if-shell \
 # Vim-style copy mode
 bind [ copy-mode
 bind-key -T copy-mode-vi "v" send-keys -X begin-selection
-bind-key -T copy-mode-vi "y" send-keys -X copy-selection
+bind-key -T copy-mode-vi "y" send-keys -X copy-pipe-and-cancel "pbcopy"
+
+# Preserve modified Enter for apps that rely on Shift+Enter
+bind-key -n S-Enter send-keys S-Enter
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

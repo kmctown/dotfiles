@@ -18,6 +18,8 @@ tmux is the standard terminal multiplexer for all AI coding workflows. Claude Co
 
 - Prefix: `Ctrl-a` (not default `Ctrl-b`)
 - Vim-style copy mode and pane navigation (`h/j/k/l`)
+- Copy mode `y` sends the selection to the macOS clipboard via `pbcopy`
+- Extended keys are enabled so apps can receive modified keys such as `Shift+Enter`
 - Split shortcuts: `PREFIX + -` (horizontal), `PREFIX + |` (vertical)
 - Pane resize: `Alt + Arrow Keys` (no prefix needed)
 - Reload config: `PREFIX + r`
@@ -71,6 +73,8 @@ tmux kill-session -t ai-coding
 ```
 
 **Gotcha**: The `reattach-to-user-namespace` dependency is needed for macOS pasteboard access inside tmux. The install script handles this.
+
+**Clipboard flow**: Enter copy mode with `PREFIX + [`, start a selection with `v`, then press `y` to copy the selection into the real macOS clipboard.
 
 **Gotcha**: If you're already inside a tmux session, `ai-cli` / `ai-swarm` will fail to attach (nested sessions). Detach first with `PREFIX + d`, or use `tmux switch-client -t <session>`.
 
