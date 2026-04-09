@@ -67,7 +67,7 @@ brew upgrade
 
 # Install from Brewfile
 echo "› brew bundle"
-brew bundle --file=$DOTFILES/Brewfile
+brew bundle --no-lock --file=$DOTFILES/Brewfile || true
 
 # Install software
 echo "› script/install"
