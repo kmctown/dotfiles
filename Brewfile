@@ -49,7 +49,7 @@ brew 'dicklesworthstone/tap/xf'
 # Apps
 cask '1password'
 cask '1password-cli'
-cask 'basecamp-cli'
+cask 'basecamp'
 cask 'claude-code'
 cask 'codex'
 cask 'ghostty'
