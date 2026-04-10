@@ -85,10 +85,38 @@ bind -r L resize-pane -R 5
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# ----------------------------------------------------------------------
+# | Status Bar (Powerline / Solarized)                                 |
+# ----------------------------------------------------------------------
 
-# Show PREFIX indicator in status bar
-set -g status-right '#{?client_prefix, PREFIX ,}'
+# Status bar position and refresh
+set -g status-interval 1
+set -g status-position bottom
+
+# Solarized dark base
+set -g status-style 'bg=colour0'
+
+# Left: session name + directory + git branch
+set -g status-left-length 100
+set -g status-left '#[fg=colour15,bg=colour14,bold] #S #[fg=colour14,bg=colour8,nobold]#[fg=colour15,bg=colour8] #{b:pane_current_path} #[fg=colour8,bg=colour2]#[fg=colour0,bg=colour2] #(cd #{pane_current_path} && git branch --show-current 2>/dev/null || echo "-") #[fg=colour2,bg=colour0]'
+
+# Right: PREFIX indicator + hostname
+set -g status-right-length 100
+set -g status-right '#[fg=colour1]#[bg=colour0]#{?client_prefix,,}#[fg=colour15]#[bg=colour1]#{?client_prefix, prefix on ,}#[fg=colour14]#[bg=colour1]#{?client_prefix,,}#[fg=colour14]#[bg=colour0]#{?client_prefix,,}#[fg=colour15]#[bg=colour14] #h '
+
+# Active window: yellow tab with powerline arrows
+set -g window-status-current-format '#[fg=colour0,bg=colour11]#[fg=colour7,bg=colour11] #I  #W #[fg=colour11,bg=colour0]'
+
+# Inactive windows: muted
+set -g window-status-format '#[fg=colour10,bg=colour0] #I  #W '
+
+# Window separator
+set -g window-status-separator ''
+
+# Automatically renumber windows when one is closed
+set -g renumber-windows on
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # [ PREFIX + r ] Reload tmux config
 bind r source-file ~/.tmux.conf \; display "tmux configs reloaded"
