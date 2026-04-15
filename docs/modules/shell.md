@@ -17,6 +17,7 @@ Zsh setup with oh-my-zsh, auto-loaded topic configs, and a convention-based load
 | `zsh/fpath.zsh` | Function path for `functions/` directory |
 | `oh-my-zsh/index.zsh` | oh-my-zsh bootstrap: agnoster theme, plugins (docker, git, z) |
 | `system/env.zsh` | `EDITOR='cursor'` |
+| `ntm/completion.zsh` | Guarded NTM shell integration |
 | `system/aliases.zsh` | `ls` with color, `caf` (caffeinate) |
 
 ### Load Order
@@ -29,7 +30,7 @@ Zsh setup with oh-my-zsh, auto-loaded topic configs, and a convention-based load
   4. Source */*.zsh (except path/completion)  → aliases, config, env, oh-my-zsh
   5. compinit  → initialize autocomplete
   6. Source */completion.zsh  → git, ruby, zsh completions
-  7. Post-init: mise, bun, LM Studio, ntm shell integration, dcg check
+  7. Post-init: mise, bun, LM Studio, dcg check
 ```
 
 ### Oh-My-Zsh
@@ -71,7 +72,7 @@ No registration needed. The naming convention handles discovery.
 - **Glob-based discovery**: `config_files=($DOTFILES/**/*.zsh)` with zsh array filtering
 - **Three-pass loading**: path → config → completion (ensures PATH is set before tools are configured)
 - **Re-symlink safety**: Bootstrap re-links after oh-my-zsh install to recover `~/.zshrc`
-- **Conditional init**: Post-init tools (mise, bun, ntm) guarded with existence checks
+- **Conditional init**: Optional tools use guard clauses; completion-aware init like `ntm/completion.zsh` loads after `compinit` so generated `compdef` calls work correctly
 
 ## Code Examples and Gotchas
 

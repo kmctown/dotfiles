@@ -11,10 +11,10 @@ First-class support for AI-assisted development using Claude Code, Codex, tmux s
 | Component | Config Location | Purpose |
 |---|---|---|
 | Claude Code | `bin/a`, `tmux/aliases.zsh` | Primary AI coding agent |
-| Codex | `codex/aliases.zsh` | Secondary agent |
+| Codex | `bin/c`, `codex/aliases.zsh` | Secondary agent |
 | tmux | `tmux/` | Terminal multiplexer for agent workspaces |
 | Beads (bd) | `agents/Brewfile` | Agent memory / task tracking |
-| NTM | `zsh/zshrc.symlink` (shell integration) | Named tmux manager for agent orchestration |
+| NTM | `ntm/completion.zsh` (shell integration) | Named tmux manager for agent orchestration |
 | DCG | `zsh/zshrc.symlink` (hook check) | Destructive command guard |
 
 ### Workflows
@@ -22,6 +22,11 @@ First-class support for AI-assisted development using Claude Code, Codex, tmux s
 **Solo Claude** (`bin/a` or `a` alias):
 ```sh
 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude --dangerously-skip-permissions
+```
+
+**Solo Codex** (`bin/c` or `c`):
+```sh
+codex --dangerously-bypass-approvals-and-sandbox
 ```
 
 **Claude + Codex workspace** (`ai-cli`):
@@ -50,6 +55,7 @@ Installed via `brew bundle --file=~/.dotfiles/agents/Brewfile`:
 | Name | Type | Command |
 |---|---|---|
 | `a` | bin script | Claude Code with agent teams |
+| `c` | bin script | Codex without approvals or sandbox |
 | `cca` | alias | Claude Code with agent teams (`agents/aliases.zsh`) |
 | `codex` | alias | `codex` |
 | `ai-cli` | function | tmux session (Claude + Codex or Claude-only) |
@@ -59,7 +65,7 @@ Installed via `brew bundle --file=~/.dotfiles/agents/Brewfile`:
 
 - **Progressive complexity**: `a` for quick single-agent, `ai-cli` for workspace, `ai-swarm` for full parallel coding
 - **Codex detection**: `ai-cli` checks `command -v codex` to decide layout
-- **Consistent flags**: All Claude invocations use `--dangerously-skip-permissions` and `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+- **Explicit entrypoints**: `bin/a` and `bin/c` provide short launch commands for the preferred Claude Code and Codex modes
 - **Session reuse**: All tmux functions reattach to existing sessions instead of creating duplicates
 - **tmux as orchestrator**: Sessions and splits managed by tmux — Claude Code agent teams also spawn splits natively via tmux
 

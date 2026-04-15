@@ -53,6 +53,10 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 (( $+commands[mise] )) && eval "$(mise activate zsh)"
 
+# rbenv must init after mise — mise's precmd hook rebuilds PATH from a snapshot,
+# so anything added before mise activate gets stripped on first prompt
+(( $+commands[rbenv] )) && eval "$(rbenv init - zsh)"
+
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/istream/.lmstudio/bin"
 # End of LM Studio CLI section
@@ -64,9 +68,6 @@ export PATH="$PATH:/Users/istream/.lmstudio/bin"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# ntm shell integration
-eval "$(ntm shell zsh)"
 
 # dcg: warn if hook was silently removed from Claude Code settings
 if command -v dcg &>/dev/null && command -v jq &>/dev/null; then

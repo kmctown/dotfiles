@@ -34,6 +34,7 @@ Topic-centric macOS dotfiles. Each top-level directory is a topic (git, zsh, tmu
 | `script/install` | Run all `topic/install.sh` scripts |
 | `bin/dot` | Pull repo, apply macOS defaults, update brew, run installers |
 | `bin/a` | Launch Claude Code with agent teams |
+| `bin/c` | Launch Codex without approvals or sandbox |
 | `ai-cli` | Launch tmux AI coding workspace |
 
 ## Coding Style

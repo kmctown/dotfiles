@@ -41,6 +41,7 @@
 | iterm2 | Color schemes | yes | no |
 | macos | System defaults, fixes | no (scripts only) | no |
 | ngrok | Tunnel alias | no | yes |
+| ntm | NTM shell integration | no | no |
 | oh-my-zsh | Framework setup | yes | yes (index.zsh) |
 | ruby | Ruby/rbenv config | no | yes |
 | system | Core aliases, env, keys, grc | no | yes |
@@ -90,7 +91,7 @@ Defined in `zsh/zshrc.symlink`:
 3. */*.zsh                       # Everything else (aliases, config, env)
 4. compinit                      # Initialize autocomplete
 5. */completion.zsh              # Completion scripts (git, ruby, zsh)
-6. Post-init: mise, bun, LM Studio, ntm, dcg check
+6. Post-init: mise, bun, LM Studio, dcg check
 ```
 
 ## Symlink Transform

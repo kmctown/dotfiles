@@ -30,6 +30,21 @@ Standardized on tmux as the terminal multiplexer for all AI coding workflows. Re
 - `docs/modules/tmux.md` — new module doc replacing cmux.md
 - Updated: AGENTS.md, INDEX.md, architecture.md, ai-coding.md, lessons-learned.md
 
+## 2026-04-13 — Canonicalize NTM shell integration
+
+Moved NTM shell integration out of `zsh/zshrc.symlink` into a dedicated `ntm/` topic so it follows the repo's topic-centric shell loading conventions.
+
+- Added: `ntm/completion.zsh` with guarded init: `(( $+commands[ntm] )) && eval "$(ntm shell zsh)"`
+- Updated: `zsh/zshrc.symlink` to remove the unguarded direct `ntm` eval
+- Updated: `docs/modules/shell.md`, `docs/modules/ai-coding.md`, `docs/reference/architecture.md`
+
+## 2026-04-14 — Add Codex launcher script
+
+Added a `bin/c` shortcut that mirrors `bin/a` and launches Codex with approvals and sandboxing disabled.
+
+- Added: `bin/c`
+- Updated: `AGENTS.md`, `docs/modules/ai-coding.md`
+
 ## Maintenance & Accretion
 
 Add a dated entry here whenever documentation is created, updated, or when a gap is identified. Each entry should describe what changed and why.
