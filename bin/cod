@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Quick shortcut to ~*-~*AI*~-*~
+#
+# Load up Codex with the "we know what we're doing" settings, which in this
+# setup means skipping approvals and sandboxing.
+#
+# USAGE:
+#
+#   $ cod
+#   # => opens Codex in full auto-danger mode.
+codex --dangerously-bypass-approvals-and-sandbox
